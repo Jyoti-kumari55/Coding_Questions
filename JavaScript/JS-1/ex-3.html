@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="myBooks">Enter your favorite Books:</label>
+    <textarea cols="40" rows="5" id="myBooks" ></textarea> 
+    <button type="submit" id="bookBtn">Display Book List</button>
+    <p id="getBookList"></p>
+    <br/>
+    <label for="myRecipes">Enter a Recipe:</label>
+    <textarea cols="40" rows="5" id="myRecipes" ></textarea> 
+    <button type="submit" id="recipeBtn">Display Recipe</button>
+    <p id="getRecipeList"></p>
+    <br/>
+    <label for="myBio">Enter your Personal Bio:</label>
+    <textarea cols="40" rows="5" id="myBio" ></textarea> 
+    <button type="submit" id="bioBtn">Display Bio</button>
+    <p id="getMyBio"></p>
+    <br/>
+    <label for="myGoals">Enter your list of Goals:</label>
+    <textarea cols="40" rows="5" id="myGoals" ></textarea> 
+    <button type="submit" id="golasBtn">Display Goals</button>
+    <p id="getMyGoals"></p>
+    <br/>
+
+    <script>
+        const myBooks = document.getElementById("myBooks");
+        const bookBtn = document.getElementById("bookBtn");
+        const getBookList = document.getElementById("getBookList");
+        bookBtn.addEventListener("click", () => {
+            const books = myBooks.value;
+            getBookList.textContent = `Your favorite books: ${books} `
+        });
+
+        const myRecipes = document.getElementById("myRecipes");
+        const recipeBtn = document.getElementById("recipeBtn");
+        const getRecipeList = document.getElementById("getRecipeList");
+        recipeBtn.addEventListener("click", () => {
+            const userInput = myRecipes.value;
+            var recipes = userInput.split("\n\n");
+            getRecipeList.innerHTML = `<div><p><b>Ingredients: </b><br/> ${recipes[0]} </p>  
+                <p> <b>Instrunctions: </b> <br/>${recipes[1]} </p> 
+                </div>
+                `
+        });
+        const myBio = document.getElementById("myBio");
+        const bioBtn = document.getElementById("bioBtn");
+        const getMyBio = document.getElementById("getMyBio");
+        bioBtn.addEventListener("click", () => {
+            const bio = myBio.value;
+            getMyBio.textContent = `Your Personal bio: ${bio}.`;
+        });
+
+        const myGoals = document.getElementById("myGoals");
+        const golasBtn = document.getElementById("golasBtn");
+        const getMyGoals = document.getElementById("getMyGoals");
+        golasBtn.addEventListener("click", () => {
+            const goals = myGoals.value;
+            getMyGoals.textContent = `Your goals list: ${goals}`
+        })
+    </script>
+</body>
+</html>

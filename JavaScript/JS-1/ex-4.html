@@ -23,6 +23,19 @@
     <button type="submit" id="userPassBtn">Display Age</button>
     <button id="checkUserPass">Check Password</button>
     <p id="userPassResult"></p>
+    <br/>
+    <label for="wordInput">What is JavScript?</label>
+    <textarea rows="5" cols="40" id="wordInput" ></textarea>
+    <button id="displayWordBtn">Display Answer</button>
+    <button id="wordCountBtn" >Count Words</button>
+    <p id="showWord"></p>
+    <p id="countWords"></p>
+    <br/>
+    <label for="todoInput">Todos List: </label>
+    <textarea rows="5" cols="40" id="todoInput" ></textarea>
+    <button id="displayTodoBtn">Display List</button>
+    <button id="todoCountBtn" >Count Todo List</button>
+    <p id="showTodo"></p>
     
     <script>
         const myAge = document.getElementById("myAge");
@@ -90,9 +103,66 @@
                 userPassResult.textContent = `Password Accepted.`
                 userPassResult.style.color = "green"   
             }
-
         })
 
+        const wordInput = document.getElementById("wordInput");
+        const displayWordBtn = document.getElementById("displayWordBtn");
+        const wordCountBtn = document.getElementById("wordCountBtn");
+        const showWord = document.getElementById("showWord");
+        const countWords = document.getElementById("countWords");
+        // 1. Method
+        var words;
+        // displayWordBtn.addEventListener("click", () => {
+        //     words = wordInput.value;
+        //     showWord.textContent = `Your Answer: ${words}.`;   
+        //     showWord.style.color = "black";
+        //     countWords.textContent = "";       
+        // });
+        // wordCountBtn.addEventListener("click", () => {
+        //     if(words.split(" ").length > 6){
+        //        countWords.textContent = `Word count exceeding.`;
+        //        showWord.style.color = "red";
+        //        countWords.style.color = "red";
+        //     }else {
+        //         countWords.textContent = `Good.`;
+        //         showWord.style.color = "green";
+        //         countWords.style.color = "green";
+        //     }
+        // });
+
+        //. 2. Method
+        displayWordBtn.addEventListener("click", () => {
+            words = wordInput.value;
+            showWord.textContent = `Your Answer: ${words}.`;   
+            showWord.style.color = "black";
+        });
+
+        wordCountBtn.addEventListener("click", () => {
+            if(words.split(" ").length > 6){
+               showWord.innerHTML = `<div><p>Your Answer: ${words}.</p> <p> <p>Word count exceeding.</p>`;
+               showWord.style.color = "red";
+            }else {
+                showWord.innerHTML = `<div><p>Your Answer: ${words}.</p> <p>Good.</p></div>`;
+                showWord.style.color = "green";
+            }
+        });
+
+        const todoInput = document.getElementById("todoInput");
+        const displayTodoBtn = document.getElementById("displayTodoBtn");
+        const todoCountBtn = document.getElementById("todoCountBtn");
+        const showTodo = document.getElementById("showTodo");
+        var todos;
+        displayTodoBtn.addEventListener("click", () => {
+            todos = todoInput.value;
+            showTodo.textContent = `Your Todos: ${todos}`;
+            showTodo.style.color = "black";
+        });
+        todoCountBtn.addEventListener("click", () => {
+            const todoCounts = todos.split(", ").length;
+            showTodo.textContent = `Total number of Todos: ${todoCounts}`;
+            showTodo.style.color = "green";
+        })
+        
     </script>
 
 </body>

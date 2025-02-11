@@ -60,3 +60,44 @@ const createNewObjectWithDynamicField = (...args) => {
 }
 console.log(createNewObjectWithDynamicField("name", "Maze", "favColor", "Pink", "isMarried", false)); // Output: { name: "Maze", favColor: "Pink", isMarried: false }
 console.log(createNewObjectWithDynamicField("age", 35, "hobby", "Cooking", "isMarried", true)); // Output: { age: 35, hobby: "Cooking", isMarried: true }
+
+// Write an arrow function that takes an object containing temperature details and prints them.
+// console.log(printTemperature({ location: "New York", temperature: 15 }));
+
+const printTemperature = ({ location, temperature }) => {
+    return `Location: ${location}, Temperature: ${temperature}`
+}
+ console.log(printTemperature({ location: "New York", temperature: 15 }));
+ console.log(printTemperature({ location: "London", temperature: 10 }));
+
+// Write an arrow function that takes an array containing a student's name and their scores, and prints them.
+//console.log(printStudentScores(["Alice", 90, 85, 95]))
+
+const printStudentScores = ([name, ...arr]) => {
+    return `Name: ${name}, Scores: ${arr}`;
+}
+console.log(printStudentScores(["Alice", 90, 85, 95]));
+
+//Write an arrow function that takes an object containing details of a product and prints them by renaming the keys.
+//console.log(printProductDetails({ name: "Laptop", price: 899 }));
+const printProductDetails = ({ name, price }) => {
+    return `Product: ${name}, Price: ${price}`
+}
+console.log(printProductDetails({ name: "Laptop", price: 899 }));
+console.log(printProductDetails({ name: "Phone", price: 599 }));
+
+//Write an arrow function that takes an object containing a person's details with default parameters and prints them. Rename name and age.
+const printPersonDetails = ({ name ="Anonymous", age="Unknown" }) => {
+    return `Name: ${name}, Age: ${age}`
+}
+console.log(printPersonDetails({ name: "John", age: 30 }));
+console.log(printPersonDetails({}));
+
+// Write an arrow function that takes an array containing a city and its population details and prints them. 
+// Rename city,  population and count
+
+const printCityPopulation = ([city, {population, country}]) => {
+    return `City: ${city}, Population: ${population}, Country: ${country}`
+}
+console.log(printCityPopulation(["New York", { population: 8623000, country: "USA" }]));
+console.log(printCityPopulation(["Tokyo", { population: 37833000, country: "Japan" }]));

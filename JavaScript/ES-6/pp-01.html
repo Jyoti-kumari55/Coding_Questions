@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+        <p><b>Ques: 1 </b>Write a program that generates an array of numbers from 1 to 20. <br/>But for every multiple of 3, replace the number with "Fizz", 
+            for every multiple of 5, replace the number with "Buzz" and for every multiples of 3 & 5, replace with "FizzBuzz".<br/>
+             Display the resulting array on the DOM as an unordered list.
+            </p>
+            <br/>
+      <h1>FizzBuzz Program Output</h1>
+    </header>
+    <main>
+      <ul id="numList"></ul>
+    </main>
+    <script>
+
+      const numList = document.getElementById("numList");
+
+      const generateNum = (num) => {
+        const arr = [];
+        for (let i = 1; i <= num; i++) {
+
+          if (i % 3 === 0 && i % 5 === 0) {
+            arr.push("FizzBuzz");
+          } else if (i % 5 === 0) {
+            arr.push("Buzz");
+          } else if (i % 3 === 0 ) {
+            arr.push("Fizz");
+          } else {
+            arr.push(i);
+          }
+        }
+        console.log(arr);
+        numList.innerHTML = "";
+        arr.forEach((element) => {
+          const li = document.createElement("li");
+          li.textContent = element;
+          numList.appendChild(li);
+        });
+      };
+    generateNum(20);
+    </script>
+  </body>
+</html>

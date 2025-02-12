@@ -32,9 +32,9 @@
             if(num === 2) return true;
             if(num % 2 === 0) return false;
             for(let i = 3; i <= Math.sqrt(num); i+=2) {
-                console.log("---1: ", i)
+                // console.log("---1: ", i)
                 if(num % i === 0) return false;
-                console.log("---2: ", i)
+                // console.log("---2: ", i)
             }
             return true
         }

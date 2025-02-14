@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="submit" id="countBtn1">Increment Count 1</button>
+    <button type="submit" id="countBtn2">Increment Count 2</button>
+    <br/>
+    <br/>
+    <div>Count 1: <span id="displayCount1"></span></div>
+    <br/>
+    <div>Count 2: <span id="displayCount2"></span></div>
+    <br/>
+    <div id="result"></div>
+
+    <script>
+        const countBtn1 = document.getElementById("countBtn1");
+        const countBtn2 = document.getElementById("countBtn2");
+        const displayCount1 = document.getElementById("displayCount1");
+        const displayCount2 = document.getElementById("displayCount2");
+        const result = document.getElementById("result");
+
+        let count1 = 0;
+        let count2 = 0;
+        countBtn1.addEventListener("click", () => {
+            count1++;
+            displayCount1.textContent = count1;
+            updateCountResult();
+        });
+        countBtn2.addEventListener("click", () => {
+            count2++;
+            displayCount2.textContent = count2;
+            updateCountResult();
+        })
+
+        const updateCountResult = () => {
+            if(count1 > count2) {
+                result.textContent = `Count 1 is more than Count 2.`
+            }else if(count1 == count2){
+                result.textContent = `Count 1 is equal to Count 2.`
+            }else {
+                result.textContent = `Count 2 is more than Count 1.`
+            }
+        }
+    </script>
+</body>
+</html>

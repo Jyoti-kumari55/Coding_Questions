@@ -1,3 +1,4 @@
 # Coding_Questions
-## JavaScript (Es6)
-## React
+
+Javascript 
+Based on MERN (MongoDb, Express, React, Node)

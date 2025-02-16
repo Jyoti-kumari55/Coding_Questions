@@ -1,3 +1,3 @@
 # Coding_Questions
-##JavaScript (Es6)
-##React
+## JavaScript (Es6)
+## React

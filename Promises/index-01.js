@@ -145,3 +145,4 @@ fetchTemperature(14).then((message) => {
 }).catch((error) => {
     console.error(error)
 });
+

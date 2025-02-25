@@ -118,7 +118,7 @@ const books = [
 const filteredBooks = books.filter((book) => book.genre === "Fantasy");
 console.log(filteredBooks);
 
-//2. Given an array of objects representing movies, filter out the movies released before 2010, with a rating less than 8.0, and not in the "Action" or "Adventure" genre.
+//12. Given an array of objects representing movies, filter out the movies released before 2010, with a rating less than 8.0, and not in the "Action" or "Adventure" genre.
 
 const moviesData = [
   { title: "Inception", year: 2010, rating: 8.8, genre: "Sci-Fi" },
@@ -148,7 +148,7 @@ const filteredOutProducts = productsData
   .map((product) => product.name);
 console.log(filteredOutProducts);
 
-//6. Write a function that takes an array  of objects with name, role, and array of hours which represents the time the person spends 
+//14. Write a function that takes an array  of objects with name, role, and array of hours which represents the time the person spends 
 // on the server each day. Find the person who is the most active in the community and spends most of the time in it using reduce() method.
 
 const community = [
@@ -174,7 +174,7 @@ const mostTimeSpendPerson = community.reduce((mostActivePerson, currValue) => {
 });
 console.log(mostTimeSpendPerson);
 
-//7. Write a function that takes an array of objects with name, role and array of hours which represents the time a person spends 
+//15. Write a function that takes an array of objects with name, role and array of hours which represents the time a person spends 
 // on the server each day. Give the tag of regular to students who are active in the community and spends more than 20 hours a week.
 
 const communityData = [

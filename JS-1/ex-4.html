@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="myAge">Enter your age:</label>
+    <input type="number" id="myAge"/>
+    <button type="submit" id="showAgeBtn">Display Age</button>
+    <button id="checkAge">Check Eligibility</button>
+    <p id="ageResult"></p>
+    <br/>
+    <label for="userAns">Are you a student:</label>
+    <input type="text" id="userAns"/>
+    <button type="submit" id="userAnsBtn">Display Age</button>
+    <button id="checkUserAns">Check Eligibility</button>
+    <p id="ansResult"></p>
+    <br/>
+    <label for="userPass">Enter password:</label>
+    <input type="text" id="userPass"/>
+    <button type="submit" id="userPassBtn">Display Age</button>
+    <button id="checkUserPass">Check Password</button>
+    <p id="userPassResult"></p>
+    <br/>
+    <label for="wordInput">What is JavScript?</label>
+    <textarea rows="5" cols="40" id="wordInput" ></textarea>
+    <button id="displayWordBtn">Display Answer</button>
+    <button id="wordCountBtn" >Count Words</button>
+    <p id="showWord"></p>
+    <p id="countWords"></p>
+    <br/>
+    <label for="todoInput">Todos List: </label>
+    <textarea rows="5" cols="40" id="todoInput" ></textarea>
+    <button id="displayTodoBtn">Display List</button>
+    <button id="todoCountBtn" >Count Todo List</button>
+    <p id="showTodo"></p>
+    
+    <script>
+        const myAge = document.getElementById("myAge");
+        const showAgeBtn = document.getElementById("showAgeBtn");
+        const checkAge = document.getElementById("checkAge");
+        const ageResult = document.getElementById("ageResult");
+        var userAge;
+        showAgeBtn.addEventListener("click", () => {
+            userAge = myAge.value;
+            ageResult.textContent = `Youe age: ${userAge}`;
+            ageResult.style.color = `black`
+        });
+        checkAge.addEventListener("click", () => {
+            if(userAge >= 18) {
+                ageResult.style.color = `green`
+            }else {
+                ageResult.style.color = `red`;
+            }
+        });
+
+        const userAns = document.getElementById("userAns");
+        const userAnsBtn = document.getElementById("userAnsBtn");
+        const checkUserAns = document.getElementById("checkUserAns");
+        const ansResult = document.getElementById("ansResult");
+        var userInput;
+        userAnsBtn.addEventListener("click", () => {
+          userInput = userAns.value;
+          if(userInput === "Yes" || userInput === "yes" || userInput === "YES"){
+            ansResult.textContent = `You answer is: ${userInput}`
+            ansResult.style.color = "black"
+           }else if(userInput === "No" || userInput === "no" || userInput === "No"){
+            ansResult.textContent = `You answer is: ${userInput}`;
+            ansResult.style.color = "black";
+        }else  {
+            ansResult.innerHTML = `<b>Please enter yes or no.</b>`
+            ansResult.style.color = "black";
+          }
+        });
+        checkUserAns.addEventListener("click", () => {
+            if(userInput === "Yes" || userInput === "yes" || userInput === "YES"){
+              ansResult.textContent = `You are eligible.`
+              ansResult.style.color = "green"
+           }else {
+              ansResult.textContent = `You are not eligible.`
+              ansResult.style.color = "red"  
+           }
+        });
+
+        const userPass = document.getElementById("userPass");
+        const userPassBtn = document.getElementById("userPassBtn");
+        const checkUserPass = document.getElementById("checkUserPass");
+        const userPassResult = document.getElementById("userPassResult");
+
+        var password;
+        userPassBtn.addEventListener("click", () => {
+            password = userPass.value;
+            userPassResult.textContent = `Your password: ${password}`;
+            userPassResult.style.color = "black"           
+        });
+        checkUserPass.addEventListener("click", () => {
+            if(password.length < 6 || !password.includes("@")) {
+                userPassResult.textContent = `Invalid Password.Password must contain @ and length should be greater the 6 characters.`
+                userPassResult.style.color = "red"               
+            }else {
+                userPassResult.textContent = `Password Accepted.`
+                userPassResult.style.color = "green"   
+            }
+        })
+
+        const wordInput = document.getElementById("wordInput");
+        const displayWordBtn = document.getElementById("displayWordBtn");
+        const wordCountBtn = document.getElementById("wordCountBtn");
+        const showWord = document.getElementById("showWord");
+        const countWords = document.getElementById("countWords");
+        // 1. Method
+        var words;
+        // displayWordBtn.addEventListener("click", () => {
+        //     words = wordInput.value;
+        //     showWord.textContent = `Your Answer: ${words}.`;   
+        //     showWord.style.color = "black";
+        //     countWords.textContent = "";       
+        // });
+        // wordCountBtn.addEventListener("click", () => {
+        //     if(words.split(" ").length > 6){
+        //        countWords.textContent = `Word count exceeding.`;
+        //        showWord.style.color = "red";
+        //        countWords.style.color = "red";
+        //     }else {
+        //         countWords.textContent = `Good.`;
+        //         showWord.style.color = "green";
+        //         countWords.style.color = "green";
+        //     }
+        // });
+
+        //. 2. Method
+        displayWordBtn.addEventListener("click", () => {
+            words = wordInput.value;
+            showWord.textContent = `Your Answer: ${words}.`;   
+            showWord.style.color = "black";
+        });
+
+        wordCountBtn.addEventListener("click", () => {
+            if(words.split(" ").length > 6){
+               showWord.innerHTML = `<div><p>Your Answer: ${words}.</p> <p> <p>Word count exceeding.</p>`;
+               showWord.style.color = "red";
+            }else {
+                showWord.innerHTML = `<div><p>Your Answer: ${words}.</p> <p>Good.</p></div>`;
+                showWord.style.color = "green";
+            }
+        });
+
+        const todoInput = document.getElementById("todoInput");
+        const displayTodoBtn = document.getElementById("displayTodoBtn");
+        const todoCountBtn = document.getElementById("todoCountBtn");
+        const showTodo = document.getElementById("showTodo");
+        var todos;
+        displayTodoBtn.addEventListener("click", () => {
+            todos = todoInput.value;
+            showTodo.textContent = `Your Todos: ${todos}`;
+            showTodo.style.color = "black";
+        });
+        todoCountBtn.addEventListener("click", () => {
+            const todoCounts = todos.split(", ").length;
+            showTodo.textContent = `Total number of Todos: ${todoCounts}`;
+            showTodo.style.color = "green";
+        })
+        
+    </script>
+
+</body>
+</html>

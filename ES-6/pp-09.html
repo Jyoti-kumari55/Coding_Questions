@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Program: 1</h2>
+    <button type="submit" id="incrementCount1Btn">Increment Count 1</button>
+    <button type="submit" id="incrementCount2Btn">Increment Count 2</button>
+    <br/>
+    <br/>
+    <div id="resultCount1"> </div>
+    <br/>
+    <div id="resultCount2"> </div>
+    <br/> <br/>
+    <h2>Program: 2</h2>
+    <button type="submit" id="count1Btn">Increment Count 1</button>
+    <button type="submit" id="count2Btn">Increment Count 2</button>
+    <br/>
+    <br/>
+    <div>Count 1: <span id="showCount1"></span> </div>
+    <br/>
+    <div>Count 2: <span id="showCount2"></span> </div>
+
+    <h2>Program: 3</h2>
+    <button type="submit" id="countBtn1">Increment Count 1</button>
+    <button type="submit" id="countBtn2">Increment Count 2</button>
+    <br/>
+    <br/>
+    <div>Count 1: <span id="displayCount1">0</span></div>
+    <br/>
+    <div>Count 2: <span id="displayCount2">0</span></div>
+    <br/>
+    <div>Total Count: <span id="displayTotalCount">0</span></div>
+    <script>
+        const incrementCount1Btn = document.getElementById("incrementCount1Btn");
+        const incrementCount2Btn = document.getElementById("incrementCount2Btn");
+        const resultCount1 = document.getElementById("resultCount1");
+        const resultCount2 = document.getElementById("resultCount2");
+        let count1 = 0;
+        let count2 = 0;
+        incrementCount1Btn.addEventListener("click", () => {
+            count1++;
+            resultCount1.innerHTML = `<b>Count 1: </b>${count1}`;
+        });
+        incrementCount2Btn.addEventListener("click", () => {
+            count2++;
+            resultCount2.innerHTML = `<b>Count 2: </b>${count2}`;
+        });
+
+        const count1Btn = document.getElementById("count1Btn");
+        const count2Btn = document.getElementById("count2Btn");
+        const showCount1 = document.getElementById("showCount1");
+        const showCount2 = document.getElementById("showCount2");
+
+        let counter1 = 0;
+        let counter2 = 0;
+        count1Btn.addEventListener("click", () => {
+            counter1++;
+            showCount1.textContent = counter1;
+        });
+        count2Btn.addEventListener("click", () => {
+            counter2++;
+            showCount2.textContent = counter2;
+        });
+
+        const countBtn1 = document.getElementById("countBtn1");
+        const countBtn2 = document.getElementById("countBtn2");
+        const displayCount1 = document.getElementById("displayCount1");
+        const displayCount2 = document.getElementById("displayCount2");
+        const displayTotalCount = document.getElementById("displayTotalCount");
+
+        let increment1 = 0;
+        let increment2 = 0;
+        countBtn1.addEventListener("click", () => {
+            increment1++;
+            displayCount1.textContent = increment1;
+            displayTotalCount.textContent = increment1 + increment2;
+
+        });
+        countBtn2.addEventListener("click", () => {
+            increment2++;
+            displayCount2.textContent = increment2;
+            displayTotalCount.textContent = increment1 + increment2;
+
+        });
+
+
+    </script>
+</body> 
+</html>

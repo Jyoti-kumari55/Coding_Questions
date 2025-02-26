@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="submit" id="decCount1Btn">Decrement Count 1 </button>
+    <button type="submit" id="decCount2Btn">Decrement Count 2</button>
+    <br/>
+    <br/>
+    <div >Count 1: <span id="showCount1">20</span></div>
+    <br/>
+    <div >Count 2: <span id="showCount2">20</span ></div> <br/>
+    <div >Total Count: <span id="totalCount">40</span></div>
+
+<script>
+    const decCount1Btn = document.getElementById("decCount1Btn");
+    const decCount2Btn = document.getElementById("decCount2Btn");
+    const showCount1 = document.getElementById("showCount1");
+    const showCount2 = document.getElementById("showCount2");
+    const totalCount = document.getElementById("totalCount");
+
+    let count1 = 20;
+    let count2 = 20;
+    decCount1Btn.addEventListener("click", () => {
+        // count1--
+        showCount1.textContent = --count1 ;      
+        updateTotalCount();
+    });
+    decCount2Btn.addEventListener("click", () => {
+       count2 -= 1;
+        showCount2.textContent = count2 ;      
+        updateTotalCount();
+    });
+
+    const updateTotalCount = () => {
+        totalCount.textContent = count1 + count2;
+    }
+</script>
+
+</body>
+</html>

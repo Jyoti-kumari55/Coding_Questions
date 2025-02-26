@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <p><b>Ques: 5 </b>Write a program that takes a sentence as user input and capitalizes the text in a specific way based on the number of words. 
+            The conditions are as follows:
+            If the number of words in the sentence is less than 4, capitalize the first letter of each word.
+            If the number of words is 4 or more, only capitalize the first letter of the first word.  
+            The program should display the modified sentence on the DOM as an output.
+            Explore toUpperCase(), charAt() and slice() methods for this exercise.
+            </p>
+            <br/>
+      <h1>Capitalize Words Program</h1>
+    </header>
+    <main>
+        <div>
+            <label for="words">Enter a Sentance: </label>
+            <input type="text" id="words" />
+            <button type="submit" id="capitalizeWordsBtn">Capitalize Words</button>
+        </div>      
+        <br/>
+       <div id="capitalizeWords"></div>
+    </main>
+    <script>
+        const words = document.getElementById("words");
+        const capitalizeWordsBtn = document.getElementById("capitalizeWordsBtn");
+        const capitalizeWords = document.getElementById("capitalizeWords");
+        capitalizeWordsBtn.addEventListener("click", () => {
+            let inputWords = words.value.trim();
+            let givenSent = inputWords.split(" ");
+            if(givenSent.length < 4){
+                let sentence = " ";
+                for(let i = 0; i < givenSent.length; i++) {
+                    sentence += givenSent[i].charAt(0).toUpperCase() + givenSent[i].slice(1) + " ";
+                    capitalizeWords.textContent = sentence;
+                }               
+            }else {
+                capitalizeWords.textContent = inputWords.charAt(0).toUpperCase() + inputWords.slice(1);
+            }
+        })
+    </script>
+</body>
+</html>

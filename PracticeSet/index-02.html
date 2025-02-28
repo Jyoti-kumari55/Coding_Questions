@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button:disabled {
+            cursor: not-allowed;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Render age greated than 21: </h1>
+    <label>Enter a age: </label>
+    <input type="number" id="inputAge" />
+    <button id="checkAgeBtn">Display Age</button>
+    <br/>
+    <div id="showAge"></div>
+    <br/>
+    <br/>
+    <h1>Show user name</h1>
+    <label>First name : </label>
+    <input type="text" id="firstName" />
+    <label>Last name : </label>
+    <input type="text" id="lastName" />
+    <button id="displayBtn" disabled>Accept Name</button>
+    <div id="showName"></div>
+    <script>
+        const inputAge = document.getElementById("inputAge");
+        const checkAgeBtn = document.getElementById("checkAgeBtn");
+        const showAge = document.getElementById("showAge");
+
+        checkAgeBtn.addEventListener("click", () => {
+            const age = inputAge.value;
+            if(age > 21) {
+                showAge.style.color = "orange";
+                showAge.textContent = `User age is: ${age}`;
+            }else {
+                showAge.style.color = "blue";
+                showAge.textContent = `User age is: ${age}`;
+            }
+        });
+
+        const inputFirstName = document.getElementById("firstName");
+        const inputLastName = document.getElementById("lastName");
+        const displayBtn = document.getElementById("displayBtn");
+        const showFullName = document.getElementById("showName");
+
+        const getFullName = () => {
+            const firstName = inputFirstName.value.trim();
+            const lastName = inputLastName.value.trim(); 
+            return {firstName, lastName}
+        }
+        const renderNameButton = () => {
+          const {firstName, lastName} = getFullName();
+            if(firstName && lastName) {
+                displayBtn.disabled = false;
+            }else {
+                displayBtn.disabled = true
+            }
+        }
+        inputFirstName.addEventListener("input", renderNameButton);
+        inputLastName.addEventListener("input", renderNameButton);
+
+        displayBtn.addEventListener("click", () => {
+          const {firstName, lastName} = getFullName();
+            const userFullName = `${firstName} - ${lastName}`;
+            showName.textContent = `Full Name: ${userFullName}`;
+        })
+
+
+    </script>
+</body>
+</html>

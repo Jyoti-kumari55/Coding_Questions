@@ -152,24 +152,64 @@ function checkAnagrams(str1, str2) {
     count2[char] = (count2[char] || 0) + 1;
   }
   for (let char in count1) {
-    if (count1[char] !== count2[char]){
-        return false
+    if (count1[char] !== count2[char]) {
+      return false;
     }
   }
   return true;
 }
-console.log("Is Anagrams: " , checkAnagrams("listen", "silent")); 
-console.log("Is Anagrams: " , checkAnagrams("team", "pale")); 
+console.log("Is Anagrams: ", checkAnagrams("listen", "silent"));
+console.log("Is Anagrams: ", checkAnagrams("team", "pale"));
 
 //12. Count Vowels in a String
 const countVowelsInStr = (str) => {
-    let count = 0;
-    let vowels = "aeiouAEIOU";
-    for (let i  = 0; i < str.length; i++) {
-        if(vowels.includes(str[i])){
-            count++;
+  let count = 0;
+  let vowels = "aeiouAEIOU";
+  for (let i = 0; i < str.length; i++) {
+    if (vowels.includes(str[i])) {
+      count++;
+    }
+  }
+  return count;
+};
+console.log("Count Vowels: ", countVowelsInStr("Hello world"));
+
+//13. Find the maximum difference between two numbers in an array?
+const maximumDiffNum = (arr) => {
+  let min = arr[0];
+  let maxDiff = 0;
+  for (let i = 0; i < arr.length; i++) {
+    const diff = arr[i] - min;
+    if (diff > maxDiff) {
+      maxDiff = diff;
+    }
+  }
+  return maxDiff;
+};
+
+console.log("Maximum difference between two numbers in an array: ", maximumDiffNum([1, 2, 90, 10, 110]));
+
+//14. Remove Duplicates from an Array
+function removeDuplicates(arr) {
+    let uniqueArr = [];
+    for(let i = 0; i < arr.length; i++) {
+        if(!uniqueArr.includes(arr[i])) {
+            uniqueArr.push(arr[i])
         }
     }
-    return count;
+    return uniqueArr;
+
 }
-console.log("Count Vowels: ", countVowelsInStr("Hello world"))
+console.log("Remove duplicates from an Array: ", removeDuplicates([5, 2, 5, 6, 6, 7]));
+
+//15. Get Unique Characters from a String.
+const uniqueChar = (str) => {
+    const uniqueLetters = [];
+    for (let i = 0; i < str.length; i++) {
+        if(!uniqueLetters.includes(str[i])){
+            uniqueLetters.push(str[i])
+        }
+    }
+    return uniqueLetters.join("");
+}
+console.log("Unique Characters: ", uniqueChar("JavaScript Developer"))

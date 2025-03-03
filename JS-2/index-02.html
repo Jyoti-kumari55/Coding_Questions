@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>Program 1: Tick the checkbox below to agree to the terms:</label><br/>
+    <input type="checkbox" id="termCheck" />I agree to the terms and conditions.
+    <br/> 
+    <p id="displayResult"></p>
+    <br/>
+<label>Program 2: Select multiple food allergies: </label>
+<input type="checkbox" name="food" value="dairy" />Dairy
+<input type="checkbox" name="food" value="nuts" />Nuts
+<input type="checkbox" name="food" value="gluten" />Gluten
+<button type="submit" id="foodBtn">Display selected food Allergies:</button>
+<div id="showFood"></div>
+<div id="foodMessage"></div>
+<br/>
+<br/>
+<label>Program 3: Select multiple travel destinations: </label>
+<input type="checkbox" name="destinations" value="Paris" />Paris
+<input type="checkbox" name="destinations" value="New York" />New York
+<input type="checkbox" name="destinations" value="Tokyo" />Tokyo
+<button type="submit" id="destinationBtn">Display selected travel destinations:</button>
+<div id="showDestinations"></div>
+<br/>
+<br/>    
+<label>Program 4: Select multiple sports: </label>
+<input type="checkbox" name="sports" value="Soccer" />Soccer
+<input type="checkbox" name="sports" value="Basketball" />Basketball
+<input type="checkbox" name="sports" value="Tennis" />Tennis
+<button type="submit" id="sportsBtn">Display selected Sports:</button>
+<div id="showSports"></div>
+<br/>
+<br/>
+<label>Program 5: Select multiple clothing colors: </label>
+<input type="checkbox" name="colors" value="Black" />Black 
+<input type="checkbox" name="colors" value="White" />White
+<input type="checkbox" name="colors" value="Blue" />Blue
+<button type="submit" id="colorsBtn">Display selected clothing Colors:</button>
+<div id="showColors"></div>
+<br/>
+<br/>
+<label>Program 6: Select multiple social media platforms: </label>
+<input type="checkbox" name="media" value="Facebook" />Facebook
+<input type="checkbox" name="media" value="Twitter" />Twitter
+<input type="checkbox" name="media" value="Instagram" />Instagram
+<button type="submit" id="mediaBtn">Display selected Social Media Platforms:</button>
+<div id="showMedia"></div>
+<script>
+    const termCheck = document.getElementById("termCheck");
+    const displayResult = document.getElementById("displayResult");
+    termCheck.addEventListener("change", () => {
+     if(termCheck.checked) {
+        displayResult.textContent = "User agreed to Terms."
+    }else {
+        displayResult.textContent = " ";
+    }
+    });
+
+    const foodBtn = document.getElementById("foodBtn");
+    const showFood = document.getElementById("showFood");
+    foodBtn.addEventListener("click", () => {
+        const food = document.getElementsByName("food");
+        let seletedFood = [];
+        for(let i = 0 ; i < food.length; i++) {
+            if(food[i].checked) {
+                seletedFood.push(food[i].value);
+            }
+            if(seletedFood.length > 0) {
+              showFood.textContent = `Selected food: ${seletedFood}`;
+            }else {
+              showFood.textContent = `Please select at least one allergy food.`;
+            }
+        }
+    });
+  
+    const showDestinations = document.querySelector("#showDestinations");
+    document.getElementById("destinationBtn").addEventListener("click", () => {
+        const destinations = document.getElementsByName("destinations");
+        let selectedDestination = [];
+        for(let i = 0; i < destinations.length; i++) {
+            if(destinations[i].checked) {
+                selectedDestination.push(destinations[i].value);
+            }
+            if(selectedDestination.length > 0) {
+                showDestinations.textContent = `Selected destinations: ${selectedDestination}`;
+            }else {
+                showDestinations.textContent = "Please select at least one travel destinations."
+            }
+        }
+    });
+
+    const showSports = document.getElementById("showSports");
+    document.getElementById("sportsBtn").addEventListener("click", () => {
+        const sports = document.getElementsByName("sports");
+        let selectedSports = [];
+        for(let i = 0; i < sports.length; i++) {
+            if(sports[i].checked) {
+                selectedSports.push(sports[i].value);
+            }
+            if(selectedSports.length > 0) {
+                showSports.textContent = `Selected sports: ${selectedSports}`;
+            }else {
+                showSports.textContent = "Please select at least one sports.";
+            }
+        }
+    });
+
+    const showColors = document.querySelector("#showColors");
+    document.getElementById("colorsBtn").addEventListener("click", () => {
+        const colors = document.getElementsByName("colors");
+        let selectedColors = [];
+        for(let i = 0; i < colors.length; i++) {
+            if(colors[i].checked) {
+                selectedColors.push(colors[i].value);
+            }
+            if(selectedColors.length > 0) {
+                showColors.textContent = `Selected colors: ${selectedColors}`;
+            }else {
+                showColors.textContent = "Please select at least one color."
+            }
+        }
+    });
+
+    const showMedia = document.querySelector("#showMedia");
+    document.getElementById("mediaBtn").addEventListener("click", () => {
+        const medias = document.getElementsByName("media");
+        let selectedMedia = [];
+        for(let i = 0; i < medias.length; i++) {
+            if(medias[i].checked) {
+                selectedMedia.push(medias[i].value);
+            }
+            if(selectedMedia.length > 0) {
+                showMedia.textContent = `Selected colors: ${selectedMedia}`;
+            }else {
+                showMedia.textContent = "Please select at least one color."
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label>Select a mood:</label>
+    <input type="radio" name="mood" value="Happy" />Happy
+    <input type="radio" name="mood" value="Sad" />Sad
+    <input type="radio" name="mood" value="Excited" />Excited
+    <p id="displayMood"></p>
+
+    <label>Choose a book genre:</label>
+    <input type="radio" name="genre" value="Mystery" />Mystery
+    <input type="radio" name="genre" value="Romance" />Romance
+    <input type="radio" name="genre" value="Science Fiction" />Science Fiction
+    <button id="genreBtn">Display Book Genre</button>
+    <p id="displayGenre"></p>
+
+    <label>Choose a clothing style:</label>
+    <input type="radio" name="style" value="Casual" />Casual
+    <input type="radio" name="style" value="Formal" />Formal
+    <input type="radio" name="style" value="Sporty" />Sporty
+    <button id="styleBtn">Display Selected Style</button>
+    <p id="displayStyle"></p>
+
+    <label>Choose a weather preference:</label>
+    <input type="radio" name="weather" value="Sunny" />Sunny
+    <input type="radio" name="weather" value="Rainy" />Rainy
+    <input type="radio" name="weather" value="Snowy" />Snowy
+    <button id="weatherBtn">Display Selected Weather</button>
+    <p id="displayWeather"></p>
+
+    <script>
+      const mood = document.getElementsByName("mood");
+      const displayMood = document.getElementById("displayMood");
+      for (let i = 0; i < mood.length; i++) {
+        mood[i].addEventListener("change", () => {
+          const seletedMood = document.querySelector(
+            'input[name="mood"]:checked'
+          ).value;
+          displayMood.textContent = `Selected Mood: ${seletedMood}`;
+        });
+      }
+
+      const genre = document.getElementsByName("genre");
+      const displayGenre = document.getElementById("displayGenre");
+
+      document.getElementById("genreBtn").addEventListener("click", () => {
+        const seletedGenre = document.querySelector(
+          'input[name="genre"]:checked');
+
+        if (seletedGenre) {
+          displayGenre.textContent = `Selected Mood: ${seletedGenre.value}`;
+        } else {
+          displayGenre.textContent = `Please select one of them`;
+        }
+      });
+
+      const displayStyle = document.getElementById("displayStyle");
+      document.getElementById("styleBtn").addEventListener("click", () => {
+        const selectedStyle = document.querySelector(
+          'input[name="style"]:checked');
+
+        if (selectedStyle) {
+          displayStyle.textContent = `Selected Style: ${selectedStyle.value}`;
+        } else {
+            displayStyle.textContent = `Please select one of them`;
+        }
+      });
+
+      const displayWeather = document.getElementById("displayWeather");
+      document.getElementById("weatherBtn").addEventListener("click", () => {
+        const selectedWeather = document.querySelector(
+          'input[name="weather"]:checked');
+
+        if (selectedWeather) {
+            displayWeather.textContent = `Selected Style: ${selectedWeather.value}`;
+        } else {
+            displayWeather.textContent = `Please select one of them`;
+        }
+      });
+    </script>
+  </body>
+</html>

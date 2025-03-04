@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>Choose a movie genre: </label>
+    <select id="genres">
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+
+    </select>
+    <p id="showMovieGenres"></p>
+    <br/>
+    <label>Select a weather condition: </label>
+    <select id="weather">
+        <option value="Sunny">Sunny</option>
+        <option value="Rainy">Rainy</option>
+        <option value="Snowy">Snowy</option>
+    </select>
+    <p id="showWeather"></p>
+    <br/>
+    <label>Select a language: </label>
+    <select id="language">
+        <option value="English">English</option>
+        <option value="Spanish">Spanish</option>
+        <option value="French">French</option>
+    </select>
+    <button id="languageBtn">Display Greeting</button>
+    <p id="showLanguage"></p>
+    <br/>
+
+    <label>Select a Musical Instrument: </label>
+    <select id="instrument">
+        <option value="Piano">Piano</option>
+        <option value="Guitar">Guitar</option>
+        <option value="Violin">Violin</option>
+    </select>
+    <button id="instrumentBtn">Display Fun Fact</button>
+    <p id="showInstrument"></p>
+    <br/>
+
+    <label>Show a pet: </label>
+    <select id="pet">
+        <option value="Dog">Dog</option>
+        <option value="Cat">Cat</option>
+        <option value="Fish">Fish</option>
+    </select>
+    <button id="petBtn">Display Pet Description</button>
+    <p id="showPet"></p>
+    <br/>
+
+<script>
+    const genre = document.getElementById("genres");
+    const showMovieGenres = document.getElementById("showMovieGenres");
+    genre.addEventListener("change", () => {
+        const selectedGenre = genre.value;
+        const movieData = {
+        Action: "The Dark Knight", 
+        Comedy: "The Hangover", 
+        Drama: "The Shawshank Redemption", 
+        Horror: "The Shining"
+        }
+        showMovieGenres.textContent = `Recommended ${selectedGenre} Movie: ${movieData[selectedGenre]}`;
+    });
+
+const weather = document.getElementById("weather");
+const showWeather = document.getElementById("showWeather");
+weather.addEventListener("change", () => {
+    const seletedWeather = weather.value;
+    const weatherData = {
+        Sunny: "Picnic in the Park.",
+        Rainy: "Movie day Indoors.",
+        Snowy: "Build a Snowman."
+    }
+    showWeather.textContent = `Outdoor Activity Suggestion: ${weatherData[seletedWeather]}`;
+});
+
+const language = document.getElementById("language");
+const showLanguage = document.getElementById("showLanguage");
+document.getElementById("languageBtn").addEventListener("click", () => {
+    const selectedLanguage = language.value;
+    const greetings = {
+        English: "Hello",
+        Spanish: "Hola!",
+        French: "Bonjour!"
+    }
+    showLanguage.textContent = `Common Greeting: ${greetings[selectedLanguage]}`;
+});
+
+const instrument = document.getElementById("instrument");
+const showInstrument = document.getElementById("showInstrument");
+document.getElementById("instrumentBtn").addEventListener("click", () => {
+    const selectedInstrument = instrument.value;
+    const instrumentFact = {
+        Piano: "Piano has 88 keys.",
+        Guitar: "The guitar is one of the most popular instrument in the world!",
+        Violin: "The violin is a string instrument known for its sweet sound.!"
+    }
+    showInstrument.textContent = `Fun Fact: ${instrumentFact[selectedInstrument]}`;
+});
+
+const pet = document.getElementById("pet");
+const showPet = document.getElementById("showPet");
+document.getElementById("petBtn").addEventListener("click", () => {
+    const selectedPet = pet.value;
+    const petDesc = {
+        Dog: "Dog is very faithful animal",
+        Cat: "Cats are independent and playful animal.",
+        Fish: "Fish are low-maintainenance and peaceful pets."
+    }
+    showPet.textContent = `Pet Description: ${petDesc[selectedPet]}`;
+});
+</script>        
+</body>
+</html>

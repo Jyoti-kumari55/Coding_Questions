@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>User Waitlist Form</h1>
+    <form id="userWaitlistForm">
+      <label><b>Full Name: </b> </label>
+      <input id="userName" type="text" />
+      <br />
+      <br />
+      <label><b>Phone Number: </b></label>
+      <input type="number" id="userPhoneNum" />
+      <br />
+      <br />
+      <label><b>Email: </b></label>
+      <input type="email" id="userEmail" />
+      <br />
+      <br />
+      <label><b>Gender: </b></label> <br />
+      <input type="radio" name="gender" value="Male" />Male <br />
+      <input type="radio" name="gender" value="Female" />Female <br />
+      <input type="radio" name="gender" value="Other" />Other <br />
+
+      <br />
+      <br />
+
+      <label><b>Are you a college graduate: </b></label><br />
+      <input type="radio" name="graduate" value="Yes" />Yes <br />
+      <input type="radio" name="graduate" value="No" />No <br />
+      <input type="radio" name="graduate" value="Dropout" />Dropout <br />
+      <br />
+      <label><b>Are you working anywhere full-time or part-time: </b></label>
+      <br />
+      <select id="work">
+        <option value="Working Full Time">Working Full Time</option>
+        <option value="Working Part Time">Working Part Time</option>
+        <option value="Not Working Anywhere">Not Working Anywhere</option>
+      </select>
+      <br />
+      <br />
+      <label><b>Why do you want to learn web development? </b> </label>
+      <br />
+      <textarea id="message" rows="5" cols="55"></textarea>
+      <br />
+      <br />
+      <label><b>How did you come to know about us? </b> </label><br />
+      <input type="checkbox" name="howKnow" value="Youtube" />Youtube <br />
+      <input type="checkbox" name="howKnow" value="Instagram" />Instagram <br />
+      <input type="checkbox" name="howKnow" value="Linkedln" />Linkedln <br />
+      <input type="checkbox" name="howKnow" value="Twitter" />Twitter <br />
+      <input type="checkbox" name="howKnow" value="Friends and Family" />Friends
+      and Family <br />
+      <input type="checkbox" name="howKnow" value="Other" />Other <br />
+      <br />
+
+      <input type="checkbox" id="confirm" required />
+      <label
+        > <b>I confirm that all information in this form is factually true. </b></label
+      >
+      <br />
+      <br />
+      <button type="submit" id="formBtn">Submit Details</button>
+    </form>
+    <br/>
+    <br/>
+    <div id="displayUserDetails"></div>
+    <script>
+        const displayUserDetails = document.getElementById("displayUserDetails");
+        const userWaitlistForm = document.getElementById("userWaitlistForm");
+
+        userWaitlistForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const userName = document.getElementById("userName").value;
+            const userPhoneNum = document.getElementById("userPhoneNum").value;
+            const userEmail = document.getElementById("userEmail").value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const graduate = document.querySelector('input[name="graduate"]:checked').value;
+            const work = document.getElementById("work").value;
+            const userMessage = document.getElementById("message").value;
+            const howKnow = document.getElementsByName("howKnow");
+            let seletedChannel = [];
+            for(let i = 0; i < howKnow.length; i++) {
+                if(howKnow[i].checked) {
+                    seletedChannel.push(howKnow[i].value);
+                }
+            }
+
+            const confirm = document.querySelector("#confirm").checked;
+            const userInput = `<h2>Details Submitted: </h2>
+            <p><b>Name: </b>${userName} </p>
+            <p><b>Phone Number: </b>${userPhoneNum} </p>
+            <p><b>Email: </b>${userEmail} </p>
+            <p><b>Gender: </b>${gender} </p>
+            <p><b>Are you a college graduate: </b>${graduate} </p>
+            <p><b>Are you working anywhere full-time or part-time: </b>${work} </p>
+             <p><b>Why do you want to learn web development?: </b> ${userMessage}</p>
+             <p><b>How did you come to know about us? </b>${seletedChannel.join(", ")} </p>
+             `
+             displayUserDetails.innerHTML = userInput;
+        })
+    </script>
+  </body>
+</html>

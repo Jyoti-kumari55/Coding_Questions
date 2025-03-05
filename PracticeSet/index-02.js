@@ -13,7 +13,7 @@ const numberToArray1 = (number) => {
     }
     return result;
 }
-console.log("Number to Array1: ", numberToArray1(12345));
+console.log("Number to Array1 of strings: ", numberToArray1(12345));
 
 // Method: 2.Using toString(), split(), and map()
 const numberToArray2 = (number) =>  {

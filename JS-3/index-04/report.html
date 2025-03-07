@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">Calorie & Workout Report</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href="home.html">Home</a>
+              <a class="nav-link" href="calories.html">Calories</a>
+              <a class="nav-link active" aria-current="page" href="report.html"
+                >Report</a
+              >
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mt-4">
+      <div id="workoutList"></div>
+    </main>
+    <script>
+      const workoutData = [
+        {
+          day: "Day 1",
+          workoutDay: "Full Body Strength Training",
+          exercises: ["Squats", "Lunges", "Push-ups", "rows", "plank"],
+          duration: 45,
+        },
+        {
+          day: "Day 2",
+          workoutDay: "Cardio and Core",
+          exercises: ["Jogging", "Cycling", "Brisk walking"],
+          duration: 30,
+        },
+        {
+          day: "Day 3",
+          workoutDay: "Rest or Active Recovery",
+          exercises: ["Light Streching", "Yoga", "Walking"],
+          duration: 60,
+        },
+        {
+          day: "Day 4",
+          workoutDay: "Lower Body Strength Training",
+          exercises: ["Deadlifts", "Hip Thrusts", "Leg press", "Calf raises"],
+          duration: 45,
+        },
+        {
+          day: "Day 5",
+          workoutDay: "Cardio and Upper Body",
+          exercises: [
+            "Shoulder press",
+            "Bicep curls",
+            "Tricep drops",
+            "Chest flies",
+          ],
+          duration: 45,
+        },
+        {
+          day: "Day 6",
+          workoutDay: "High Intensity Interval Training (HIIT)",
+          exercises: ["Walkin", "gentle Yoga"],
+          duration: 60,
+        },
+      ];
+
+      const workoutList = document.getElementById("workoutList");
+
+      // Using forEach()
+
+      //   workoutData.forEach(workout => {
+      //     const workoutInput = `
+      //       <div class="row">
+      //         <div class="col-md-6">
+      //           <div class="card mb-4">
+      //             <div class="card-header"><h3> ${workout.day}</h3></div>
+      //             <div class="card-body">
+      //               <h4 class="card-title">${workout.workoutDay}</h4>
+      //               <p class="card-text"><b>Exercises:</b> ${workout.exercises.join(', ')}</p>
+      //               <p class="card-text"><b>Duration:</b> ${workout.duration} minutes</p>
+      //             </div>
+      //           </div>
+      //         </div>
+      //       </div>
+      //     `;
+      //     workoutList.innerHTML += workoutInput;
+      //   });
+
+      // Using for-loop()
+
+      for (let i = 0; i < workoutData.length; i++) {
+        const workoutCard = document.createElement("div");
+        // workoutCard.classList.add("row");
+
+        workoutCard.innerHTML = `
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3> ${workoutData[i].day}</h3>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title"> ${workoutData[i].workoutDay}</h4>
+                  <p class="card-text"> <b>Exercises: </b>${workoutData[
+                    i
+                  ].exercises.join(", ")} </p>
+                  <p class="card-text"> <b>Duration: </b>${
+                    workoutData[i].duration
+                  } minutes </p>
+                </div>
+            </div>
+         </div>
+         </div
+        
+        `;
+        workoutList.appendChild(workoutCard);
+      }
+    </script>
+  </body>
+</html>

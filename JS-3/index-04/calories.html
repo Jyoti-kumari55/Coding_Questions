@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">Calorie & Workout Report</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href="home.html">Home</a>
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="calories.html"
+                >Calories</a
+              >
+              <a class="nav-link" href="report.html">Report</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="mt-4 container">
+      <!-- <form id="coloriesAddForm" class="mb-4"> -->
+        <label for="day" class="form-label">Day: </label>
+        <input type="text" id="day" class="form-control mb-4" />
+        <label for="consumedCalories" class="form-label"
+          >Calories Consumed:
+        </label>
+        <input type="number" id="consumedCalories" class="form-control mb-4" />
+        <label for="burnedCalories" class="form-label">Calories Burned: </label>
+        <input type="number" id="burnedCalories" class="form-control mb-4" />
+        <button type="submit" class="btn btn-primary" id="coloriesAddBtn">
+          Add Calories
+        </button>
+      <!-- </form> -->
+
+      <div id="coloriesList" class="mt-4"></div>
+    </main>
+
+    <script>
+
+      const caloriesData = [
+              {day: "Day 1", caloriesConsumed: 2000, caloriesBurned: 300},
+              {day: "Day 2", caloriesConsumed: 1800, caloriesBurned: 400}
+
+            ];
+
+      const caloriesList = document.getElementById("coloriesList");
+
+      function updateCaloriesList() {
+        caloriesList.innerHTML = "";
+        for(let i = 0; i < caloriesData.length; i++) {
+          const col = document.createElement("div");
+          col.className = 'col-lg-12 w-75';
+
+          const card = document.createElement("div");
+          card.className = 'card mb-3';
+
+          const cardHeader = document.createElement("div");
+          cardHeader.className = 'card-header';
+
+          const h2 = document.createElement("h3");
+          h2.textContent = caloriesData[i].day;
+          cardHeader.appendChild(h2);
+
+          const cardBody = document.createElement('div');
+          cardBody.className = 'card-body';
+          const consumned = document.createElement('p');
+          consumned.className = 'card-text';
+          consumned.innerHTML = `<strong>Calories Consumed: </strong>${caloriesData[i].caloriesConsumed}`;
+
+          const burned = document.createElement('p');
+          burned.className = 'card-text';
+          burned.innerHTML = `<strong>Burned Consumed: </strong>${caloriesData[i].caloriesBurned}`;
+
+          cardBody.appendChild(consumned);
+          cardBody.appendChild(burned);
+          card.appendChild(cardHeader);
+          card.appendChild(cardBody);
+          col.appendChild(card);
+          caloriesList.appendChild(col);
+        }
+      }
+
+      document.getElementById("coloriesAddBtn").addEventListener("click", () => {
+        const day = document.getElementById("day").value;
+      const consumedCalories = document.getElementById("consumedCalories").value;
+      const burnedCalories = document.getElementById("burnedCalories").value;
+      if(day && consumedCalories && burnedCalories) {
+        const newCaloriesData = {
+          day: day,
+          caloriesConsumed: consumedCalories,
+          caloriesBurned: burnedCalories
+        };
+        console.log(newCaloriesData);
+        caloriesData.push(newCaloriesData);
+        updateCaloriesList();
+      }
+      });
+      updateCaloriesList();
+    </script>
+  </body>
+</html>

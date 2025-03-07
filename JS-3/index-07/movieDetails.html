@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="home.html">Movie Database</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href="home.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="movies.html"
+                >Movies</a
+              >
+              <a class="nav-link" href="report.html">Report</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container my-4">
+      <h2>Movie Details</h2>
+      <div id="movieDetails"></div>
+    </main>
+
+    <script>
+      const movieData = [
+        {
+          id: "1",
+          title: "Movie 1",
+          genre: "Action",
+          director: "John Doe",
+          details: "This is an action-packed movie.",
+        },
+        {
+          id: "2",
+          title: "Movie 2",
+          genre: "Drama",
+          director: "Alice Walker",
+          details: " A dramatic story unfolds in this movie.",
+        },
+        {
+          id: "3",
+          title: "Movie 3",
+          genre: "Comedy",
+          director: "Emiley Hunter",
+          details: "Get ready to laugh with this comedy.",
+        },
+      ];
+
+      function getMoviesDetails(id) {
+        let url = new URL(window.location.href);
+        return url.searchParams.get(id);
+      }
+
+      const myMovie = getMoviesDetails("id");
+      let movies;
+      for (let i = 0; i < movieData.length; i++) {
+        if (movieData[i].id === myMovie) {
+          movies = movieData[i];
+        }
+      }
+
+      const movieDetailElement = document.getElementById("movieDetails");
+      if (movies) {
+        const card = document.createElement("div");
+        card.classList.add("card", "w-75");
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+        const h2 = document.createElement("h2");
+        h2.textContent = movies.title;
+        const genre = document.createElement("p");
+        genre.innerHTML = `<b>Genre: </b>${movies.genre}`;
+        const details = document.createElement("p");
+        details.innerHTML = `<b>Details: </b>${movies.details}`;
+        cardBody.appendChild(h2);
+        cardBody.appendChild(genre);
+        cardBody.appendChild(details);
+        card.appendChild(cardBody);
+        movieDetailElement.appendChild(card);
+      } else {
+        movieDetailElement.textContent = "No movie recor found !!";
+      }
+    </script>
+  </body>
+</html>

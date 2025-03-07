@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="home.html">Movie Database</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href="home.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="movie.html"
+                >Movies</a
+              >
+              <a class="nav-link" href="report.html">Report</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mt-4">
+      <h1>Add a New Movie</h1>
+      <label for="title" class="form-label">Title: </label>
+      <input type="text" class="form-control mb-4" id="title" />
+      <label for="genre" class="form-label">Genre: </label>
+      <select id="genre" class="form-select mb-4">
+        <option value="Action">Action</option>
+        <option value="Drama">Drama</option>
+        <option value="Comedy">Comedy</option>
+      </select>
+
+      <label for="date" class="form-label">Release Date: </label>
+      <input type="date" class="form-control mb-4" id="date" />
+      <label for="director" class="form-label">Director: </label>
+      <input type="text" class="form-control mb-4" id="director" />
+
+      <button type="submit" id="addMovieBtn" class="btn btn-primary mb-4">
+        Add Movie
+      </button>
+
+      <div id="movieList"></div>
+    </main>
+    <script>
+      const movieData = [
+        {
+          id: "1",
+          title: "Movie 1",
+          genre: "Action",
+          releaseDate: "2023-01-12",
+          director: "John Doe",
+        },
+        {
+          id: "2",
+          title: "Movie 2",
+          genre: "Drama",
+          releaseDate: "2023-02-24",
+          director: "Jane Smith",
+        },
+        {id: "3", title: "Movie 3", genre: "Comedy", releaseDate: "2023-05-20", director: "Jane Walk"}
+      ];
+      const movieList = document.querySelector("#movieList");
+      function renderedMovieList() {
+        movieList.innerHTML = " ";
+
+        for (let i = 0; i < movieData.length; i++) {
+          const col = document.createElement("div");
+          col.className = "col";
+
+          const card = document.createElement("div");
+          card.className = "card w-75 mb-4";
+
+          const cardHeader = document.createElement("div");
+          cardHeader.className = "card-header";
+
+          const h3 = document.createElement("h3");
+          h3.textContent = `${movieData[i].title}`;
+          cardHeader.appendChild(h3);
+
+          const cardBody = document.createElement("div");
+          cardBody.className = "card-body";
+
+          const genre = document.createElement("p");
+          genre.innerHTML = `<b>Genre: </b>${movieData[i].genre}`;
+          const releaseDate = document.createElement("p");
+          releaseDate.innerHTML = `<b>Release Date: </b>${movieData[i].releaseDate}`;
+          const director = document.createElement("p");
+          director.innerHTML = `<b>Director: </b>${movieData[i].director}`;
+
+          const detailLink = document.createElement("a");
+          detailLink.href = `movieDetails.html?id=${movieData[i].id}`;
+          detailLink.className = "btn btn-primary";
+          detailLink.textContent = "Details";
+
+
+          cardBody.appendChild(genre);
+          cardBody.appendChild(releaseDate);
+          cardBody.appendChild(director);
+          cardBody.appendChild(detailLink);
+
+          card.appendChild(cardHeader);
+          card.appendChild(cardBody);
+          col.appendChild(card);
+          movieList.appendChild(col);
+        }
+      }
+
+      document.getElementById("addMovieBtn").addEventListener("click", () => {
+        const title = document.querySelector("#title").value;
+        const genre = document.querySelector("#genre").value;
+        const date = document.querySelector("#date").value;
+        const director = document.querySelector("#director").value;
+
+        if (title && genre && date && director) {
+          const newMovie = {
+            title: title,
+            genre: genre,
+            releaseDate: date,
+            director: director,
+          };
+          movieData.push(newMovie);
+          renderedMovieList();
+
+          // Reset input fields
+          document.querySelector("#title").value = "";
+          document.querySelector("#genre").value = "Action";
+          document.querySelector("#date").value = "";
+          document.querySelector("#director").value = "";
+        }
+      });
+      renderedMovieList();
+    </script>
+  </body>
+</html>

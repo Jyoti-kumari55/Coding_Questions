@@ -77,6 +77,7 @@
       function updateCaloriesList() {
         caloriesList.innerHTML = "";
         for(let i = 0; i < caloriesData.length; i++) {
+
           const col = document.createElement("div");
           col.className = 'col-lg-12 w-75';
 
@@ -119,9 +120,13 @@
           caloriesConsumed: consumedCalories,
           caloriesBurned: burnedCalories
         };
-        console.log(newCaloriesData);
+        // console.log(newCaloriesData);
         caloriesData.push(newCaloriesData);
         updateCaloriesList();
+
+        document.getElementById("day").value = "";
+        document.getElementById("consumedCalories").value = " ";
+        document.getElementById("burnedCalories").value = " "
       }
       });
       updateCaloriesList();

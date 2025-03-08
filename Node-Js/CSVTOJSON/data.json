@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "Jyoti Chaudhary",
+    "age": "25",
+    "email": "jyoti15@gmail.com"
+  },
+  {
+    "id": "2",
+    "name": "Amit",
+    "age": "21",
+    "email": "amit19@gmail.com"
+  },
+  {
+    "id": "3",
+    "name": "Sumit Kumar",
+    "age": "22",
+    "email": "sumit19@gmail.com"
+  },
+  {
+    "id": "4",
+    "name": "Praveen Chaudhary",
+    "age": "24",
+    "email": "praveen28@gmail.com"
+  },
+  {
+    "id": "5",
+    "name": "Advika",
+    "age": "3",
+    "email": "advi24@gmail.com"
+  }
+]

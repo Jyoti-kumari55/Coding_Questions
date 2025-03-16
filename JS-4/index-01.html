@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Todo API</h1>
+    <button type="submit" id="getDataBtn">Get Data</button>
+    <div id="resultData"></div>
+
+    <br/>
+    <br/>
+    <h1>JokeAPI - Programming Joke</h1>
+    <button type="submit" id="getJokeBtn">Get Data</button>
+    <div id="jokeData"></div>
+    <script>
+      const getDataBtn = document.getElementById("getDataBtn");
+      const resultData = document.getElementById("resultData");
+
+      const apiUrl = "https://jsonplaceholder.typicode.com/todos/5";
+      getDataBtn.addEventListener("click", () => {
+        fetch(apiUrl)
+          .then(function responseHandler(response) {
+            return response.json();
+          })
+          .then(function showData(data) {
+            // console.log(data);
+            resultData.innerHTML = ` <p>User ID: ${data.userId} <br/>
+                    Title: ${data.title} <br/>
+                    Completed: ${data.completed}</p>`;
+          })
+          .catch(function showError(error) {
+            resultData.textContent =
+              "An error occurred while fetching the data/\.";
+          });
+      });
+
+      const jokeResult = document.getElementById("jokeData");
+      const  jokeApiUrl = 'https://v2.jokeapi.dev/joke/Programming?type=single'
+      document.getElementById("getJokeBtn").addEventListener("click", () => {
+        fetch(jokeApiUrl)
+          .then(function responseHandler(response) {
+            return response.json()
+          }).then (function showJoke(data) {
+            // console.log(data)
+            jokeResult.innerHTML = ` <p> ${data.joke} </p>`;
+          }).catch (function catchError(error) {
+            jokeResult.textContent = "An error occurred while fetching the Joke Api."
+          })
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body class="container mt-4">
+    <h1>Random Users</h1>
+    <button id="userBtn" type="submit" class="btn btn-primary mb-4">
+      Get Random Users
+    </button>
+    <div id="usersList"></div>
+
+    <script>
+      const usersList = document.getElementById("usersList");
+      const apiUrl = "https://randomuser.me/api/?results=3";
+      document.getElementById("userBtn").addEventListener("click", () => {
+        fetch(apiUrl)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data);
+            if (data && data.results && data.results.length > 0) {
+              const users = [];
+              for (let i = 0; i < data.results.length; i++) {
+                let userData = `<div class="mb-4"> <img src=${data.results[i].picture.medium} /> <br/>
+                            Name: ${data.results[i].name.first} ${data.results[i].name.last} <br/>
+                            Email: ${data.results[i].email} </div>`;
+
+                users.push(userData);
+              }
+              const finalResult = users.join("");
+              usersList.innerHTML = finalResult;
+            } else {
+              usersList.textContent = "No user found.";
+            }
+          })
+          .catch(function (error) {
+            usersList.textContent =
+              "An error occured while fetching the user APi.";
+          });
+      });
+    </script>
+  </body>
+</html>

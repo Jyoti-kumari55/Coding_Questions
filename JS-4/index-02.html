@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body class="text-center mt-4">
+    <h1>Advice Slip API</h1>
+    <button type="submit" class="btn btn-primary mb-4" id="adviceBtn">
+      Get Advice
+    </button>
+    <div id="showAdvice"></div>
+
+    <script>
+      const showAdvice = document.getElementById("showAdvice");
+      const apiUrl = "https://api.adviceslip.com/advice";
+      document.getElementById("adviceBtn").addEventListener("click", () => {
+        fetch(apiUrl).then(function responseHandler(response) {
+          return response.json();
+        }).then(function showData(data) {
+            console.log(data);
+            showAdvice.innerHTML = `<b>${data.slip.advice}</b>`
+        }).catch(function showError(error) {
+            showAdvice.textContent = "An error occured while fetching the data."
+        })
+      });
+    </script>
+  </body>
+</html>

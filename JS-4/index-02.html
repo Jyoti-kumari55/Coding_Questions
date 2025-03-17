@@ -14,25 +14,55 @@
     ></script>
     <title>Document</title>
   </head>
-  <body class="text-center mt-4">
-    <h1>Advice Slip API</h1>
-    <button type="submit" class="btn btn-primary mb-4" id="adviceBtn">
-      Get Advice
-    </button>
-    <div id="showAdvice"></div>
+  <body>
+    <div class="text-center mt-4 mb-5">
+      <h1>Advice Slip API</h1>
+      <button type="submit" class="btn btn-primary mb-4" id="adviceBtn">
+        Get Advice
+      </button>
+      <div id="showAdvice"></div>
+    </div>
+
+    <div class="container">
+      <h1>Random User API</h1>
+      <button id="usersBtn" class="btn btn-info mb-4">Get Random User</button>
+      <div id="showUser"></div>
+    </div>
 
     <script>
       const showAdvice = document.getElementById("showAdvice");
       const apiUrl = "https://api.adviceslip.com/advice";
       document.getElementById("adviceBtn").addEventListener("click", () => {
-        fetch(apiUrl).then(function responseHandler(response) {
-          return response.json();
-        }).then(function showData(data) {
-            console.log(data);
-            showAdvice.innerHTML = `<b>${data.slip.advice}</b>`
-        }).catch(function showError(error) {
-            showAdvice.textContent = "An error occured while fetching the data."
-        })
+        fetch(apiUrl)
+          .then(function responseHandler(response) {
+            return response.json();
+          })
+          .then(function showData(data) {
+            // console.log(data);
+            showAdvice.innerHTML = `<b>${data.slip.advice}</b>`;
+          })
+          .catch(function showError(error) {
+            showAdvice.textContent =
+              "An error occured while fetching the data.";
+          });
+      });
+
+      const showUser = document.getElementById("showUser");
+      const userApiUrl = "https://randomuser.me/api/";
+      document.getElementById("usersBtn").addEventListener("click", () => {
+        fetch(userApiUrl)
+          .then(function responseHandler(response) {
+            return response.json();
+          })
+          .then(function showData(data) {
+            // console.log(data.results[0].name.first);
+            showUser.innerHTML = `<p><b>Name: </b>${data.results[0].name.first} ${data.results[0].name.last} <br/>
+                 <b>Email: </b>${data.results[0].email} <br/>
+                 <b>City: </b>${data.results[0].location.city} <br/>               
+                 </p>`;
+          }).catch(function showError(error) {
+            showUser.textContent = "An error occured while fetching the user Api."
+          })
       });
     </script>
   </body>

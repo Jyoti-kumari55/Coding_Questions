@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import Navbar from "../components/UiBars/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../components/Input/PasswordInput";
 import { validateEmail } from "../utils/helpers";
+// import axiosInstance from "../utils/axiosInstance";
+import axios from "axios";
+import { BACKENDS_URL } from "../utils/constants";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
+  const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
 
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
+    // if (!validateEmail(email)) {
+    //   setError("Please enter a valid email address or username.");
+    //   return;
+    // }
+
+    if (!emailOrUsername) {
+      setError("Please enter a valid email address or username.");
       return;
     }
 
@@ -22,6 +33,41 @@ const Login = () => {
       return;
     }
     setError("");
+
+    try {
+      const validation = {
+        email: validateEmail(emailOrUsername) ? emailOrUsername : "",
+        username: !validateEmail(emailOrUsername) ? emailOrUsername : "",
+        password: password,
+      };
+      const response = await axios.post(
+        `${BACKENDS_URL}/api/auth/login`,
+        validation,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data && response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      } else if (error.code === "ECONNABORTED") {
+        setError("Request timed out. Please try again.");
+      } else {
+        setError("An unexpected error occured. Please try some time later.");
+      }
+    }
   };
 
   return (
@@ -33,10 +79,10 @@ const Login = () => {
             <h4 className="text-3xl text-center mb-7 font-bold">Login</h4>
             <input
               type="text"
-              placeholder="Email"
+              placeholder="Email or Username"
               className="input-box"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={emailOrUsername}
+              onChange={(e) => setEmailOrUsername(e.target.value)}
             />
             {/* <input type='text' placeholder='Password' className='input-box' /> */}
             <PasswordInput

@@ -1,32 +1,68 @@
 import React, { useState } from "react";
 import Navbar from "../components/UiBars/Navbar";
 import PasswordInput from "../components/Input/PasswordInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "../utils/helpers";
+import { BACKENDS_URL } from "../utils/constants";
+import axios from "axios";
 
 const SignUp = () => {
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  
+
+  const navigate = useNavigate();
 
   const signUpHandler = async (e) => {
     e.preventDefault();
 
-    if (!name) {
-      setError("Please enter your name.");
-      return;
-    }
     if (!validateEmail(email)) {
       setError("Please enter a valid email address.");
       return;
     }
-
-    if (!password) {
-      setError("Please enter a valid password.");
-      return;
-    }
     setError("");
+
+    try {
+      const registerForm = {
+        email: email,
+        username: username,
+        name: name,
+        password: password,
+      };
+      const response = await axios.post(
+        `${BACKENDS_URL}/api/auth/register`,
+        registerForm,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data && response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+
+      if (error.response && error.response.data) {
+        const errMessage = error.response.data;
+        if (errMessage.message) {
+          setError(
+            Object.values(errMessage.message) ||
+              "Something went wrong."
+          );
+        } else {
+          setError(errMessage.message || "Something went wrong.");
+        }
+      } else {
+        setError("An unexpected error occured. Please try some time later.");
+      }
+    }
   };
   return (
     <div>
@@ -40,18 +76,32 @@ const SignUp = () => {
               placeholder="Name"
               className="input-box"
               value={name}
+              required
               onChange={(e) => setName(e.target.value)}
             />
+            <input
+              type="text"
+              placeholder="Username"
+              className="input-box"
+              value={username}
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {/* {error && <p className="text-red-500 text-xs pb-1">{error}</p>} */}
+
             <input
               type="text"
               placeholder="Email"
               className="input-box"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
             />
+            {/* {error && <p className="text-red-500 text-xs pb-1">{error}</p>} */}
 
             <PasswordInput
               value={password}
+              required
               onChange={(e) => setPassword(e.target.value)}
             />
 

@@ -25,15 +25,38 @@ router.post("/register", async (req, res) => {
         .json({ error: true, message: "Password is required." });
     }
 
-    const isExistingUser = await User.findOne({
-      email: email,
-      username: username,
-    });
-    if (isExistingUser) {
-      return res
-        .status(400)
-        .json({ error: true, message: "User already exists." });
+    const isExistingUsername = await User.findOne({ username: username });
+
+    const isExistingEmail = await User.findOne({ email: email });
+
+    let userErrors = {};
+
+    if (isExistingUsername) {
+      userErrors.username =  "This Username already exists." ;
     }
+    if (isExistingEmail) {
+     userErrors.email =  "User email already exists." ;
+    }
+
+    if(isExistingUsername && isExistingEmail) {
+      userErrors = "Username and Email both already exists."
+    }
+
+    if(Object.keys(userErrors).length > 0) {
+      return res.status(400).json({
+        error: true,
+        message: userErrors
+      })
+    }
+
+    // return res.status(400).json({
+    //   error: true,
+    //   errors: {
+    //     email: isExistingEmail ? "User email already exists." : null,
+    //     username: isExistingUsername ? "This username already exists." : null,
+    //   },
+    // });
+    
 
     const salt = await bcrypt.genSalt(16);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -67,7 +90,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password, username } = req.body;
-    if ( (!email && !username ) || !password ) {
+    if ((!email && !username) || !password) {
       return res
         .status(400)
         .json({ message: "Email or Username and Pasword are required." });
@@ -75,7 +98,7 @@ router.post("/login", async (req, res) => {
 
     const user = await User.findOne({
       // $or checks either email or username matches the register user. User can login with any of one.
-      $or: [{ email: email }, { username: username }], 
+      $or: [{ email: email }, { username: username }],
     });
     if (!user) {
       return res.status(404).json({ message: "User not found." });
@@ -97,7 +120,8 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       expiresIn: "8h",
-      httpOnly: true, secure: true
+      httpOnly: true,
+      secure: true,
     });
 
     return res.status(200).json({
@@ -122,7 +146,6 @@ router.get("/logout", (req, res) => {
     });
 
     res.status(200).json({ message: `You are successfully logged out.` });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occured while loging out." });

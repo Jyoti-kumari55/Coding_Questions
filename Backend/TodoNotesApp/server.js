@@ -19,13 +19,19 @@ app.use(
   );
 app.use(bodyParser.json());
 
+app.use(cors({
+  origin: "*"
+}));
+
 app.get("/", (req, res) => {
     res.send("Hello, Todo Notes App!");
   });
 
+  // all routes
 app.use("/api/auth", authRoutes);
 app.use("/api/todo", notesRoutes);
 app.use("/api/user", userRoutes);
+
 const PORT = 8000;
 app.listen(PORT, () => {
     console.log(`Server of Todo Note app is running on ${PORT}`);

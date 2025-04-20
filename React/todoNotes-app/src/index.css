@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background-color: #fdfeff;
+  background-color: #e4eef8;
   overflow-x: hidden;
 }
 
@@ -18,8 +18,9 @@ body {
   @apply w-full text-sm bg-blue-500 text-white p-2 rounded my-1 hover:bg-blue-800;
 }
 .icon-btn {
-  @apply text-xl text-slate-300 cursor-pointer hover:text-blue-600;
+  /* @apply text-xl cursor-pointer hover:text-blue-600; */
+  @apply text-xl cursor-pointer;
 }
 .input-label {
-  @apply text-xs text-slate-400
+  @apply text-xs font-bold text-slate-700
 }

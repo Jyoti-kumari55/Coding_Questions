@@ -12,6 +12,7 @@ const Login = () => {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [successMsg, setSuccessMsg] = useState("");
 
   const navigate = useNavigate();
 
@@ -52,7 +53,13 @@ const Login = () => {
 
       if (response.data && response.data.token) {
         localStorage.setItem("token", response.data.token);
-        navigate("/dashboard");
+        setSuccessMsg(response.data.message);
+        console.log("1212: ", response.data.userInfo, "1313: ", response.data.message);
+
+        setTimeout(() => {
+          navigate("/dashboard");
+
+        }, 1000);
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -71,12 +78,20 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div style={{
+      // backgroundImage: `url('https://images.pexels.com/photos/2736499/pexels-photo-2736499.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
+      backgroundImage: `url('https://images.pexels.com/photos/5546909/pexels-photo-5546909.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
+
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      minHeight: "100vh"
+    }} >
       <Navbar />
       <div className="flex items-center justify-center mt-28">
         <div className="w-96 border-[3.5px] rounded-xl bg-white px-7 py-10 border-gray-200">
           <form onSubmit={loginHandler}>
             <h4 className="text-3xl text-center mb-7 font-bold">Login</h4>
+            {successMsg && <p className="text-green-700 text-base mb-3">{successMsg}</p>}
             <input
               type="text"
               placeholder="Email or Username"

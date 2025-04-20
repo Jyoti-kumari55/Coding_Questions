@@ -65,7 +65,14 @@ const SignUp = () => {
     }
   };
   return (
-    <div>
+    <div style={{
+      backgroundImage: `url('https://images.pexels.com/photos/2736499/pexels-photo-2736499.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
+      // backgroundImage: `url('https://images.pexels.com/photos/5546909/pexels-photo-5546909.jpeg?auto=compress&cs=tinysrgb&w=1400')`,
+
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      minHeight: "100vh"
+    }}>
       <Navbar />
       <div className="flex items-center justify-center mt-28">
         <div className="w-96 border-[3.5px] rounded-xl bg-white px-7 py-10 border-gray-200">

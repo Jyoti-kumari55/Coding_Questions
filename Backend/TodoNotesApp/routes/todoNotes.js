@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Notes = require("../models/Notes");
 const authenticateToken = require("../config.js/verifyToken");
+const { route } = require("./auth");
 
 // Create a Note
 router.post("/addNote", authenticateToken, async (req, res) => {
@@ -87,7 +88,7 @@ router.get("/getNotes", authenticateToken, async (req, res) => {
     return res.status(200).json({
       error: false,
       message: "Notes fetched successfully.",
-      Notes: notes,
+      notes: notes,
     });
   } catch (error) {
     console.log(error);
@@ -132,5 +133,31 @@ router.delete("/deleteNote/:noteId", authenticateToken, async (req, res) => {
     });
   }
 });
+
+//update isPinned value of a note
+router.put("/editIsPinned/:noteId", authenticateToken, async (req, res) => {
+  const noteId = req.params.noteId;
+  const { isPinned } = req.body;
+  const loggedInUser = req.user;
+
+  try {
+    const note = await Notes.findOne({ _id: noteId, userId: loggedInUser });
+    if(!note) {
+      return res.status(404).json({ error: true, message: "Note not found." });
+    }
+    note.isPinned = isPinned;
+
+    const updatedNote = await note.save();
+    return res.status(200).json({ error: false, message: "Note updated successfully", note: updatedNote, })
+
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ error: "Failed to update a note.", details: error.message });
+  
+  }
+ 
+})
 
 module.exports = router;
